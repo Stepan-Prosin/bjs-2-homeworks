@@ -54,9 +54,6 @@ class AlarmClock {
 			this.IntervalID = null;
 		}
 	}
-	printAlarms() {
-		this.alarmCollection.forEach(item => console.log(item.time));
-	}
 	resetAllCalls() {
 		this.alarmCollection.forEach(item => item.canCall = true);
 	}
