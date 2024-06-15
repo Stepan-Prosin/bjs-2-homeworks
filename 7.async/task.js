@@ -1,17 +1,16 @@
 class AlarmClock {
 	constructor() {
 		this.alarmCollection = [];
-		this.IntervalID = null;
+		this.intervalid = null;
 	}
 
 	addClock(time, callback) {
-		if (time === undefined || callback === undefined) {
+		if (!time || !callback) {
 			throw new Error('Отсутствуют обязательные аргументы');
 		}
 
 		if (this.alarmCollection.find(item => item.time === time)) {
 			console.warn('Уже присутствует звонок на это же время');
-			return;
 		}
 
 		this.alarmCollection.push({
@@ -42,18 +41,19 @@ class AlarmClock {
 				item.callback();
 			}
 		}
-		if (this.IntervalID === null) {
-			this.IntervalID = setInterval(() => {
+		if (this.intervalid === null) {
+			this.intervalid = setInterval(() => {
 				this.alarmCollection.forEach(item => checkClock(item));
 			}, 1000);
 		}
 	}
 	stop() {
-		if (this.IntervalID !== null) {
-			clearInterval(this.IntervalID);
-			this.IntervalID = null;
+		if (this.intervalid !== null) {
+			clearInterval(this.intervalid);
+			this.intervalid = null;
 		}
 	}
+
 	resetAllCalls() {
 		this.alarmCollection.forEach(item => item.canCall = true);
 	}
